@@ -22,12 +22,12 @@ def run_chat():
     print("--- Smart Travel Assistant (Production Ready) ---")
     print(f"Thread ID: {thread_id}")
     print("Type 'exit' to quit.\n")
-
+    
     while True:
         user_input = input("You: ")
         if user_input.lower() in ["exit", "quit"]:
             break
-
+            
         # Start or resume the graph
         current_state = app.get_state(config)
         

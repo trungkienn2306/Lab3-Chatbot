@@ -9,11 +9,12 @@ from langchain_core.messages import SystemMessage
 
 
 # Initialize the model with Tool Calling
-model = ChatGoogleGenerativeAI(
+# Initialize the base model
+llm = ChatGoogleGenerativeAI(
     model=settings.MODEL_NAME, 
     google_api_key=settings.GEMINI_API_KEY,
     temperature=settings.TEMPERATURE
-).bind_tools(tools)
+)
 
 
 # Define the system instructions for the agent
@@ -32,12 +33,19 @@ Rules:
 def call_model(state: AgentState):
     """
     Node that calls the LLM with the current message history.
+    It conditionally binds tools if settings.USE_TOOLS is True.
     """
     messages = state["messages"]
     
     # Prepend the system prompt if it's the beginning of the conversation
     if not any(isinstance(m, SystemMessage) for m in messages):
         messages = [SystemMessage(content=SYSTEM_PROMPT)] + messages
+    
+    # Conditionally bind tools based on global settings
+    if settings.USE_TOOLS:
+        model = llm.bind_tools(tools)
+    else:
+        model = llm
         
     response = model.invoke(messages)
     # We return a list, which will be appended to the existing messages 
