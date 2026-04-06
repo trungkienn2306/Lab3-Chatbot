@@ -9,6 +9,8 @@ import json
 from datetime import datetime, timedelta
 from pathlib import Path
 from dotenv import load_dotenv
+from langchain_core.tools import tool
+
 
 # Tìm file .env từ thư mục gốc project (2 cấp trên src/agent/)
 _env_path = Path(__file__).resolve().parents[2] / ".env"
@@ -18,7 +20,7 @@ load_dotenv(dotenv_path=_env_path)
 _RESULT_DIR = Path(__file__).resolve().parents[2] / "tool result"
 _RESULT_DIR.mkdir(exist_ok=True)
 
-
+@tool
 def get_weather(location: str) -> dict:
     """
     Lấy thông tin thời tiết hiện tại và dự báo cho một địa điểm.
@@ -102,7 +104,7 @@ def get_weather(location: str) -> dict:
 
     return result
 
-
+@tool
 def get_exchange_rate(from_currency: str, to_currency: str) -> dict:
     """
     Lấy tỷ giá hối đoái giữa hai đồng tiền và lưu kết quả ra file JSON.
@@ -158,7 +160,7 @@ def get_exchange_rate(from_currency: str, to_currency: str) -> dict:
 
     return result
 
-
+@tool
 def web_search(query: str, source: str = "duckduckgo", max_results: int = 5) -> dict:
     """
     Tìm kiếm thông tin trên DuckDuckGo hoặc Wikipedia. Không cần API key.
@@ -313,6 +315,7 @@ def _safe_eval(node):
     raise ValueError(f"Biểu thức không hợp lệ: {ast.dump(node)}")
 
 
+@tool
 def calculator(expression: str) -> dict:
     """
     Tính toán biểu thức số học một cách an toàn (không dùng eval).
@@ -359,7 +362,7 @@ def calculator(expression: str) -> dict:
 
 
 
-
+@tool
 def search_flights_serpapi(
     origin: str,
     destination: str,
@@ -555,6 +558,7 @@ def search_flights_serpapi(
     return result
 
 
+@tool
 def search_hotels(
     location: str,
     check_in: str,
@@ -974,3 +978,15 @@ if __name__ == "__main__":
     #     print(f"[LỖI] {e}")
     # except Exception as e:
     #     print(f"[LỖI] {e}")
+
+@tool
+def request_user(question: str):
+    """
+    Ask the user for missing information or clarification.
+    Use this if you can't proceed without more data (e.g., user preferences, personal details).
+    """
+    # This tool will be intercepted by the graph logic/CLI to wait for user input
+    return f"REQUESTED_USER_INPUT: {question}"
+
+
+tools = [get_weather, get_exchange_rate, web_search, calculator, search_flights_serpapi, search_hotels, request_user]
