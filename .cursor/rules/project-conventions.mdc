@@ -1,0 +1,34 @@
+---
+description: Protected root docs (incl. INSTRUCTOR_GUIDE), no emoji, Vietnamese comments, clean code
+alwaysApply: true
+---
+
+# Quy ước dự án (Lab)
+
+## Tài liệu không được chỉnh sửa
+
+Không được sửa nội dung, đổi tên, hay xóa các file sau (trừ khi người dùng ra lệnh rõ ràng riêng và hiểu rõ hậu quả):
+
+- `EVALUATION.md` (thư mục gốc repo)
+- `SCORING.md` (thư mục gốc repo)
+- `README.md` (thư mục gốc repo)
+- `INSTRUCTOR_GUIDE.md` (thư mục gốc repo)
+
+Khi cần thêm hướng dẫn hoặc bổ sung, viết file mới hoặc cập nhật tài liệu khác (ví dụ `docs/`, `apps/web/README.md`), không ghi đè bốn file trên.
+
+## Emoji
+
+- Không dùng emoji trong **mã nguồn** (comment, string hiển thị nếu không được yêu cầu).
+- Không dùng emoji trong **tài liệu** bạn tạo hoặc sửa (README phụ, spec, rule, v.v.), trừ khi người dùng yêu cầu cụ thể.
+
+## Comment trong code
+
+- Thường xuyên giải thích **chức năng** của hàm / hook / module quan trọng bằng **tiếng Việt**.
+- Thuật ngữ tiếng Anh đặt trong **ngoặc đơn** khi cần bổ nghĩa, ví dụ: `// Lấy lịch sử tin nhắn từ localStorage (message history).`
+- Tránh comment thừa cho từng dòng hiển nhiên; ưu tiên comment tại điểm vào hàm, luồng lỗi, và chỗ logic không tự giải thích.
+
+## Clean code và xử lý lỗi
+
+- Giữ code gọn, đặt tên rõ, tách trách nhiệm hợp lý.
+- **Error handling** phải rõ ràng và **phù hợp chức năng module**: log hoặc thông báo có ngữ cảnh, không nuốt lỗi im lặng, không bọc try/catch quá rộng không cần thiết.
+- Với UI: người dùng cần biết khi thao tác thất bại (message lỗi phù hợp), không chỉ `console.error` nếu đó là luồng người dùng thấy được.

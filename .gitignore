@@ -4,3 +4,11 @@ __pycache__/
 *.log
 .DS_Store
 models/
+
+# Node / Vite
+node_modules/
+dist/
+*.local
+
+# ESLint cache
+.eslintcache
