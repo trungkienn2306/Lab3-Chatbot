@@ -922,55 +922,55 @@ if __name__ == "__main__":
     # except Exception as e:
     #     print(f"[LỖI] {e}")
 
-    # ==============================================================
-    # TEST Tool 6: search_hotels — Google Hotels
-    # Kịch bản: Tìm khách sạn ở Tokyo, nhận phòng ngày mai, 3 đêm, 2 người, từ 4 sao
-    # ==============================================================
-    print("\n" + "=" * 50)
-    ci = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
-    co = (datetime.now() + timedelta(days=4)).strftime("%Y-%m-%d")
-    print(f"[SerpApi] Tìm khách sạn Tokyo ({ci} → {co}, 3 đêm, 2 người) ...\n")
-
-    try:
-        hotels = search_hotels(
-            location="Tokyo",
-            check_in=ci,
-            check_out=co,
-            adults=2,
-            currency="VND",
-            rating=9,           # 9 = từ 4 sao trở lên
-            max_results=5,
-        )
-
-        print(f"  Tìm thấy: {hotels['total_found']} khách sạn  |  Hiển thị top {len(hotels['hotels'])}\n")
-
-        if hotels["brands"]:
-            print(f"  Thương hiệu nổi bật: {', '.join(hotels['brands'][:5])}\n")
-
-        print("===== TOP KHÁCH SẠN RẺ NHẤT (Google Hotels) =====")
-        for i, h in enumerate(hotels["hotels"], 1):
-            stars_label = f"{h['stars']}" if h["stars"] else "N/A"
-            rating_str  = f"{h['rating']}/5" if h["rating"] else "Chưa có"
-            reviews_str = f"{h['reviews_count']:,} đánh giá" if h["reviews_count"] else ""
-            deal_str    = f"  🏷 {h['deal']}" if h["deal"] else ""
-            amenity_str = ", ".join(h["amenities"][:4]) if h["amenities"] else ""
-
-            print(
-                f"\n  [{i}] {h['name']}{deal_str}"
-                f"\n       {stars_label} sao  |  ⭐ {rating_str}  {reviews_str}"
-                f"\n       📍 {h['location']}"
-                f"\n       💰 {h['price_per_night']:,.0f} VND/đêm"
-                f"  →  Tổng {h['total_price']:,.0f} VND ({hotels['nights']} đêm)"
-                f"\n       🛎 {amenity_str}"
-            )
-
-        if hotels["cheapest"]:
-            c = hotels["cheapest"]
-            print(f"\n  Rẻ nhất: {c['name']} — {c['price_per_night']:,.0f} VND/đêm")
-
-    except EnvironmentError as e:
-        print(f"[LỖI CẤU HÌNH] {e}")
-    except ValueError as e:
-        print(f"[LỖI] {e}")
-    except Exception as e:
-        print(f"[LỖI] {e}")
+    # # ==============================================================
+    # # TEST Tool 6: search_hotels — Google Hotels
+    # # Kịch bản: Tìm khách sạn ở Tokyo, nhận phòng ngày mai, 3 đêm, 2 người, từ 4 sao
+    # # ==============================================================
+    # print("\n" + "=" * 50)
+    # ci = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
+    # co = (datetime.now() + timedelta(days=4)).strftime("%Y-%m-%d")
+    # print(f"[SerpApi] Tìm khách sạn Tokyo ({ci} → {co}, 3 đêm, 2 người) ...\n")
+    #
+    # try:
+    #     hotels = search_hotels(
+    #         location="Tokyo",
+    #         check_in=ci,
+    #         check_out=co,
+    #         adults=2,
+    #         currency="VND",
+    #         rating=9,           # 9 = từ 4 sao trở lên
+    #         max_results=5,
+    #     )
+    #
+    #     print(f"  Tìm thấy: {hotels['total_found']} khách sạn  |  Hiển thị top {len(hotels['hotels'])}\n")
+    #
+    #     if hotels["brands"]:
+    #         print(f"  Thương hiệu nổi bật: {', '.join(hotels['brands'][:5])}\n")
+    #
+    #     print("===== TOP KHÁCH SẠN RẺ NHẤT (Google Hotels) =====")
+    #     for i, h in enumerate(hotels["hotels"], 1):
+    #         stars_label = f"{h['stars']}" if h["stars"] else "N/A"
+    #         rating_str  = f"{h['rating']}/5" if h["rating"] else "Chưa có"
+    #         reviews_str = f"{h['reviews_count']:,} đánh giá" if h["reviews_count"] else ""
+    #         deal_str    = f"  🏷 {h['deal']}" if h["deal"] else ""
+    #         amenity_str = ", ".join(h["amenities"][:4]) if h["amenities"] else ""
+    #
+    #         print(
+    #             f"\n  [{i}] {h['name']}{deal_str}"
+    #             f"\n       {stars_label} sao  |  ⭐ {rating_str}  {reviews_str}"
+    #             f"\n       📍 {h['location']}"
+    #             f"\n       💰 {h['price_per_night']:,.0f} VND/đêm"
+    #             f"  →  Tổng {h['total_price']:,.0f} VND ({hotels['nights']} đêm)"
+    #             f"\n       🛎 {amenity_str}"
+    #         )
+    #
+    #     if hotels["cheapest"]:
+    #         c = hotels["cheapest"]
+    #         print(f"\n  Rẻ nhất: {c['name']} — {c['price_per_night']:,.0f} VND/đêm")
+    #
+    # except EnvironmentError as e:
+    #     print(f"[LỖI CẤU HÌNH] {e}")
+    # except ValueError as e:
+    #     print(f"[LỖI] {e}")
+    # except Exception as e:
+    #     print(f"[LỖI] {e}")
