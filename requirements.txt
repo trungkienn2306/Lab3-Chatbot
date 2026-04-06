@@ -8,3 +8,11 @@ llama-cpp-python>=0.2.0
 fastapi>=0.115.0
 uvicorn>=0.30.0
 sqlalchemy>=2.0.0
+langgraph
+langchain-openai
+python-multipart
+langgraph-checkpoint-sqlite
+aiosqlite
+langchain-google-genai
+tavily-python
+langchain-chroma

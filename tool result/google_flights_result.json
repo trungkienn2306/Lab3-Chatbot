@@ -1,0 +1,813 @@
+{
+  "origin": "HAN",
+  "destination": "NRT",
+  "trip_type": "one_way",
+  "search_dates": [
+    "2026-04-07",
+    "2026-04-08",
+    "2026-04-09"
+  ],
+  "return_date": null,
+  "adults": 1,
+  "currency": "VND",
+  "total_found": 31,
+  "flights": [
+    {
+      "date": "2026-04-09",
+      "price": 8670299,
+      "currency": "VND",
+      "airline": "Cathay Pacific",
+      "flight_number": "CX 742",
+      "depart_time": "2026-04-09 19:10",
+      "arrive_time": "2026-04-10 13:40",
+      "duration_min": 990,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Hồng Kông",
+          "duration_min": 600
+        }
+      ],
+      "carbon_emissions_g": 302000
+    },
+    {
+      "date": "2026-04-09",
+      "price": 9286596,
+      "currency": "VND",
+      "airline": "China Airlines",
+      "flight_number": "CI 794",
+      "depart_time": "2026-04-09 17:50",
+      "arrive_time": "2026-04-10 13:15",
+      "duration_min": 1045,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Đào Viên Đài Loan",
+          "duration_min": 665
+        }
+      ],
+      "carbon_emissions_g": 379000
+    },
+    {
+      "date": "2026-04-08",
+      "price": 9394580,
+      "currency": "VND",
+      "airline": "XiamenAir",
+      "flight_number": "MF 8698",
+      "depart_time": "2026-04-08 16:20",
+      "arrive_time": "2026-04-09 13:40",
+      "duration_min": 1160,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Trường Lạc Phúc Châu",
+          "duration_min": 810
+        }
+      ],
+      "carbon_emissions_g": 296000
+    },
+    {
+      "date": "2026-04-09",
+      "price": 9394580,
+      "currency": "VND",
+      "airline": "XiamenAir",
+      "flight_number": "MF 870",
+      "depart_time": "2026-04-09 15:40",
+      "arrive_time": "2026-04-10 13:45",
+      "duration_min": 1205,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Cao Khi Hạ Môn",
+          "duration_min": 870
+        }
+      ],
+      "carbon_emissions_g": 299000
+    },
+    {
+      "date": "2026-04-09",
+      "price": 9787008,
+      "currency": "VND",
+      "airline": "China Airlines",
+      "flight_number": "CI 792",
+      "depart_time": "2026-04-09 11:30",
+      "arrive_time": "2026-04-09 20:50",
+      "duration_min": 440,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Đào Viên Đài Loan",
+          "duration_min": 65
+        }
+      ],
+      "carbon_emissions_g": 342000
+    },
+    {
+      "date": "2026-04-09",
+      "price": 9940978,
+      "currency": "VND",
+      "airline": "Hong Kong Express",
+      "flight_number": "UO 541",
+      "depart_time": "2026-04-09 09:35",
+      "arrive_time": "2026-04-09 20:40",
+      "duration_min": 545,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Hồng Kông",
+          "duration_min": 150
+        }
+      ],
+      "carbon_emissions_g": 266000
+    },
+    {
+      "date": "2026-04-09",
+      "price": 10479105,
+      "currency": "VND",
+      "airline": "Hong Kong Express",
+      "flight_number": "UO 541",
+      "depart_time": "2026-04-09 09:35",
+      "arrive_time": "2026-04-09 19:45",
+      "duration_min": 490,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Hồng Kông",
+          "duration_min": 95
+        }
+      ],
+      "carbon_emissions_g": 266000
+    },
+    {
+      "date": "2026-04-08",
+      "price": 12310879,
+      "currency": "VND",
+      "airline": "Hong Kong Express",
+      "flight_number": "UO 541",
+      "depart_time": "2026-04-08 09:35",
+      "arrive_time": "2026-04-09 16:05",
+      "duration_min": 1710,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Hồng Kông",
+          "duration_min": 1315
+        }
+      ],
+      "carbon_emissions_g": 266000
+    },
+    {
+      "date": "2026-04-07",
+      "price": 12546000,
+      "currency": "VND",
+      "airline": "Vietjet",
+      "flight_number": "VJ 934",
+      "depart_time": "2026-04-07 07:55",
+      "arrive_time": "2026-04-07 15:30",
+      "duration_min": 335,
+      "direct": true,
+      "stops": 0,
+      "layovers": [],
+      "carbon_emissions_g": 294000
+    },
+    {
+      "date": "2026-04-09",
+      "price": 12546000,
+      "currency": "VND",
+      "airline": "Vietjet",
+      "flight_number": "VJ 934",
+      "depart_time": "2026-04-09 07:55",
+      "arrive_time": "2026-04-09 15:30",
+      "duration_min": 335,
+      "direct": true,
+      "stops": 0,
+      "layovers": [],
+      "carbon_emissions_g": 294000
+    },
+    {
+      "date": "2026-04-07",
+      "price": 12847767,
+      "currency": "VND",
+      "airline": "Hong Kong Express",
+      "flight_number": "UO 541",
+      "depart_time": "2026-04-07 09:35",
+      "arrive_time": "2026-04-08 14:45",
+      "duration_min": 1630,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Hồng Kông",
+          "duration_min": 1235
+        }
+      ],
+      "carbon_emissions_g": 266000
+    },
+    {
+      "date": "2026-04-07",
+      "price": 13486416,
+      "currency": "VND",
+      "airline": "Hong Kong Express",
+      "flight_number": "UO 541",
+      "depart_time": "2026-04-07 09:35",
+      "arrive_time": "2026-04-07 20:40",
+      "duration_min": 545,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Hồng Kông",
+          "duration_min": 150
+        }
+      ],
+      "carbon_emissions_g": 266000
+    },
+    {
+      "date": "2026-04-08",
+      "price": 13487683,
+      "currency": "VND",
+      "airline": "Hong Kong Express",
+      "flight_number": "UO 541",
+      "depart_time": "2026-04-08 09:35",
+      "arrive_time": "2026-04-08 19:45",
+      "duration_min": 490,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Hồng Kông",
+          "duration_min": 95
+        }
+      ],
+      "carbon_emissions_g": 266000
+    },
+    {
+      "date": "2026-04-07",
+      "price": 13706025,
+      "currency": "VND",
+      "airline": "Korean Air",
+      "flight_number": "KE 442",
+      "depart_time": "2026-04-07 12:05",
+      "arrive_time": "2026-04-08 15:10",
+      "duration_min": 1505,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Incheon",
+          "duration_min": 1085
+        }
+      ],
+      "carbon_emissions_g": 344000
+    },
+    {
+      "date": "2026-04-09",
+      "price": 13786000,
+      "currency": "VND",
+      "airline": "Vietjet",
+      "flight_number": "VJ 932",
+      "depart_time": "2026-04-09 00:30",
+      "arrive_time": "2026-04-09 08:00",
+      "duration_min": 330,
+      "direct": true,
+      "stops": 0,
+      "layovers": [],
+      "carbon_emissions_g": 294000
+    },
+    {
+      "date": "2026-04-08",
+      "price": 15386357,
+      "currency": "VND",
+      "airline": "Cathay Pacific",
+      "flight_number": "CX 742",
+      "depart_time": "2026-04-08 19:10",
+      "arrive_time": "2026-04-09 14:30",
+      "duration_min": 1040,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Hồng Kông",
+          "duration_min": 650
+        }
+      ],
+      "carbon_emissions_g": 276000
+    },
+    {
+      "date": "2026-04-08",
+      "price": 15406000,
+      "currency": "VND",
+      "airline": "Cathay Pacific",
+      "flight_number": "CX 740",
+      "depart_time": "2026-04-08 10:55",
+      "arrive_time": "2026-04-08 20:50",
+      "duration_min": 475,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Hồng Kông",
+          "duration_min": 75
+        }
+      ],
+      "carbon_emissions_g": 312000
+    },
+    {
+      "date": "2026-04-08",
+      "price": 15406000,
+      "currency": "VND",
+      "airline": "Cathay Pacific",
+      "flight_number": "CX 742",
+      "depart_time": "2026-04-08 19:10",
+      "arrive_time": "2026-04-09 06:50",
+      "duration_min": 580,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Hồng Kông",
+          "duration_min": 185
+        }
+      ],
+      "carbon_emissions_g": 297000
+    },
+    {
+      "date": "2026-04-07",
+      "price": 16041273,
+      "currency": "VND",
+      "airline": "Hong Kong Express",
+      "flight_number": "UO 541",
+      "depart_time": "2026-04-07 09:35",
+      "arrive_time": "2026-04-07 19:45",
+      "duration_min": 490,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Hồng Kông",
+          "duration_min": 95
+        }
+      ],
+      "carbon_emissions_g": 266000
+    },
+    {
+      "date": "2026-04-07",
+      "price": 16532000,
+      "currency": "VND",
+      "airline": "Vietnam Airlines",
+      "flight_number": "VN 310",
+      "depart_time": "2026-04-07 00:45",
+      "arrive_time": "2026-04-07 07:35",
+      "duration_min": 290,
+      "direct": true,
+      "stops": 0,
+      "layovers": [],
+      "carbon_emissions_g": 229000
+    },
+    {
+      "date": "2026-04-08",
+      "price": 17651000,
+      "currency": "VND",
+      "airline": "Asiana Airlines",
+      "flight_number": "OZ 734",
+      "depart_time": "2026-04-08 23:30",
+      "arrive_time": "2026-04-09 10:50",
+      "duration_min": 560,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Incheon",
+          "duration_min": 155
+        }
+      ],
+      "carbon_emissions_g": 347000
+    },
+    {
+      "date": "2026-04-07",
+      "price": 17816000,
+      "currency": "VND",
+      "airline": "Vietjet",
+      "flight_number": "VJ 932",
+      "depart_time": "2026-04-07 00:30",
+      "arrive_time": "2026-04-07 08:00",
+      "duration_min": 330,
+      "direct": true,
+      "stops": 0,
+      "layovers": [],
+      "carbon_emissions_g": 294000
+    },
+    {
+      "date": "2026-04-07",
+      "price": 18409900,
+      "currency": "VND",
+      "airline": "JAL",
+      "flight_number": "JL 752",
+      "depart_time": "2026-04-07 23:20",
+      "arrive_time": "2026-04-08 06:30",
+      "duration_min": 310,
+      "direct": true,
+      "stops": 0,
+      "layovers": [],
+      "carbon_emissions_g": 390000
+    },
+    {
+      "date": "2026-04-08",
+      "price": 18614000,
+      "currency": "VND",
+      "airline": "Vietnam Airlines",
+      "flight_number": "VN 310",
+      "depart_time": "2026-04-08 00:45",
+      "arrive_time": "2026-04-08 07:35",
+      "duration_min": 290,
+      "direct": true,
+      "stops": 0,
+      "layovers": [],
+      "carbon_emissions_g": 229000
+    },
+    {
+      "date": "2026-04-07",
+      "price": 19970000,
+      "currency": "VND",
+      "airline": "Asiana Airlines",
+      "flight_number": "OZ 734",
+      "depart_time": "2026-04-07 23:30",
+      "arrive_time": "2026-04-08 10:50",
+      "duration_min": 560,
+      "direct": false,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Sân bay quốc tế Incheon",
+          "duration_min": 155
+        }
+      ],
+      "carbon_emissions_g": 347000
+    },
+    {
+      "date": "2026-04-08",
+      "price": 21307022,
+      "currency": "VND",
+      "airline": "JAL",
+      "flight_number": "JL 752",
+      "depart_time": "2026-04-08 23:20",
+      "arrive_time": "2026-04-09 06:30",
+      "duration_min": 310,
+      "direct": true,
+      "stops": 0,
+      "layovers": [],
+      "carbon_emissions_g": 390000
+    },
+    {
+      "date": "2026-04-09",
+      "price": 21307022,
+      "currency": "VND",
+      "airline": "JAL",
+      "flight_number": "JL 752",
+      "depart_time": "2026-04-09 23:20",
+      "arrive_time": "2026-04-10 06:30",
+      "duration_min": 310,
+      "direct": true,
+      "stops": 0,
+      "layovers": [],
+      "carbon_emissions_g": 390000
+    },
+    {
+      "date": "2026-04-09",
+      "price": 24045000,
+      "currency": "VND",
+      "airline": "Vietnam Airlines",
+      "flight_number": "VN 310",
+      "depart_time": "2026-04-09 00:45",
+      "arrive_time": "2026-04-09 07:35",
+      "duration_min": 290,
+      "direct": true,
+      "stops": 0,
+      "layovers": [],
+      "carbon_emissions_g": 229000
+    },
+    {
+      "date": "2026-04-07",
+      "price": 28020000,
+      "currency": "VND",
+      "airline": "ANA",
+      "flight_number": "NH 898",
+      "depart_time": "2026-04-07 23:55",
+      "arrive_time": "2026-04-08 07:05",
+      "duration_min": 310,
+      "direct": true,
+      "stops": 0,
+      "layovers": [],
+      "carbon_emissions_g": 1200000
+    },
+    {
+      "date": "2026-04-08",
+      "price": 28020000,
+      "currency": "VND",
+      "airline": "ANA",
+      "flight_number": "NH 898",
+      "depart_time": "2026-04-08 23:55",
+      "arrive_time": "2026-04-09 07:05",
+      "duration_min": 310,
+      "direct": true,
+      "stops": 0,
+      "layovers": [],
+      "carbon_emissions_g": 294000
+    },
+    {
+      "date": "2026-04-09",
+      "price": 28020000,
+      "currency": "VND",
+      "airline": "ANA",
+      "flight_number": "NH 898",
+      "depart_time": "2026-04-09 23:55",
+      "arrive_time": "2026-04-10 07:05",
+      "duration_min": 310,
+      "direct": true,
+      "stops": 0,
+      "layovers": [],
+      "carbon_emissions_g": 1177000
+    }
+  ],
+  "cheapest": {
+    "date": "2026-04-09",
+    "price": 8670299,
+    "currency": "VND",
+    "airline": "Cathay Pacific",
+    "flight_number": "CX 742",
+    "depart_time": "2026-04-09 19:10",
+    "arrive_time": "2026-04-10 13:40",
+    "duration_min": 990,
+    "direct": false,
+    "stops": 1,
+    "layovers": [
+      {
+        "airport": "Sân bay quốc tế Hồng Kông",
+        "duration_min": 600
+      }
+    ],
+    "carbon_emissions_g": 302000
+  },
+  "price_insights": {
+    "lowest_price": 12546000,
+    "price_level": "high",
+    "typical_price_range": [
+      4200000,
+      8700000
+    ],
+    "price_history": [
+      [
+        1770224400,
+        7346000
+      ],
+      [
+        1770310800,
+        7346000
+      ],
+      [
+        1770397200,
+        8236000
+      ],
+      [
+        1770483600,
+        8236000
+      ],
+      [
+        1770570000,
+        5716000
+      ],
+      [
+        1770656400,
+        5016000
+      ],
+      [
+        1770742800,
+        5971641
+      ],
+      [
+        1770829200,
+        5988164
+      ],
+      [
+        1770915600,
+        5716000
+      ],
+      [
+        1771002000,
+        5716000
+      ],
+      [
+        1771088400,
+        5716000
+      ],
+      [
+        1771174800,
+        5716000
+      ],
+      [
+        1771261200,
+        6380808
+      ],
+      [
+        1771347600,
+        6464000
+      ],
+      [
+        1771434000,
+        6569000
+      ],
+      [
+        1771520400,
+        6931370
+      ],
+      [
+        1771606800,
+        6928773
+      ],
+      [
+        1771693200,
+        6928773
+      ],
+      [
+        1771779600,
+        6928773
+      ],
+      [
+        1771866000,
+        6476000
+      ],
+      [
+        1771952400,
+        6476000
+      ],
+      [
+        1772038800,
+        6476000
+      ],
+      [
+        1772125200,
+        6476000
+      ],
+      [
+        1772211600,
+        6950000
+      ],
+      [
+        1772298000,
+        7159000
+      ],
+      [
+        1772384400,
+        7706712
+      ],
+      [
+        1772470800,
+        6476000
+      ],
+      [
+        1772557200,
+        6476000
+      ],
+      [
+        1772643600,
+        8224698
+      ],
+      [
+        1772730000,
+        7891000
+      ],
+      [
+        1772816400,
+        7799000
+      ],
+      [
+        1772902800,
+        7799000
+      ],
+      [
+        1772989200,
+        7201047
+      ],
+      [
+        1773075600,
+        7595000
+      ],
+      [
+        1773162000,
+        8728343
+      ],
+      [
+        1773248400,
+        8234591
+      ],
+      [
+        1773334800,
+        8741692
+      ],
+      [
+        1773421200,
+        8747988
+      ],
+      [
+        1773507600,
+        8747988
+      ],
+      [
+        1773594000,
+        8236000
+      ],
+      [
+        1773680400,
+        8236000
+      ],
+      [
+        1773766800,
+        8826261
+      ],
+      [
+        1773853200,
+        8930708
+      ],
+      [
+        1773939600,
+        8439060
+      ],
+      [
+        1774026000,
+        8938180
+      ],
+      [
+        1774112400,
+        8938180
+      ],
+      [
+        1774198800,
+        8938180
+      ],
+      [
+        1774285200,
+        8945411
+      ],
+      [
+        1774371600,
+        10479539
+      ],
+      [
+        1774458000,
+        12546000
+      ],
+      [
+        1774544400,
+        12546000
+      ],
+      [
+        1774630800,
+        12546000
+      ],
+      [
+        1774717200,
+        11678039
+      ],
+      [
+        1774803600,
+        9387742
+      ],
+      [
+        1774890000,
+        9387569
+      ],
+      [
+        1774976400,
+        11676933
+      ],
+      [
+        1775062800,
+        12546000
+      ],
+      [
+        1775149200,
+        12546000
+      ],
+      [
+        1775235600,
+        10383221
+      ],
+      [
+        1775322000,
+        12546000
+      ],
+      [
+        1775408400,
+        12546000
+      ]
+    ]
+  }
+}

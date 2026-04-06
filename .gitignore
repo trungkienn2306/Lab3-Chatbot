@@ -12,3 +12,9 @@ dist/
 
 # ESLint cache
 .eslintcache
+
+venv/
+checkpoints.sqlite
+*.json
+*.pyc
+*.pyo
