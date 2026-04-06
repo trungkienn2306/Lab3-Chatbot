@@ -1,4 +1,5 @@
 import os
+import re
 import uuid
 from typing import Optional
 
@@ -12,6 +13,71 @@ from src.agent.graph import app as agent_app
 from src.app import format_ai_response
 
 app = FastAPI(title="Smart Travel Assistant API")
+
+TRAVEL_SCOPE_KEYWORDS = {
+    "du lich",
+    "travel",
+    "trip",
+    "itinerary",
+    "lich trinh",
+    "di dau",
+    "diem den",
+    "destination",
+    "khach san",
+    "hotel",
+    "chuyen bay",
+    "flight",
+    "ve may bay",
+    "weather",
+    "thoi tiet",
+    "visa",
+    "ho chieu",
+    "currency",
+    "ty gia",
+    "doi tien",
+    "ngan sach",
+    "budget",
+    "han",
+    "sgn",
+    "nrt",
+    "tokyo",
+    "ha noi",
+    "ho chi minh",
+}
+
+# validate out of scope cứng bằng keyword list
+OUT_OF_SCOPE_KEYWORDS = {
+    "quicksort",
+    "merge sort",
+    "binary search",
+    "thuật toán",
+    "thuat toan",
+    "algorithm",
+    "python code",
+    "code python",
+    "java code",
+    "c++",
+    "sql schema",
+    "database design",
+    "react hook",
+    "debug code",
+    "leetcode",
+}
+
+
+def _normalize_text(text: str) -> str:
+    return re.sub(r"\s+", " ", text.strip().lower())
+
+
+def is_travel_scope(message: str) -> bool:
+    normalized = _normalize_text(message)
+    if not normalized:
+        return True
+
+    if any(keyword in normalized for keyword in OUT_OF_SCOPE_KEYWORDS):
+        return False
+
+    return any(keyword in normalized for keyword in TRAVEL_SCOPE_KEYWORDS)
 
 # Enable CORS (Allow all as requested)
 app.add_middleware(
@@ -56,6 +122,18 @@ async def chat_endpoint(request: ChatRequest):
         
         # Get the current state to check for interrupts
         current_state = agent_app.get_state(config)
+
+        # Hard guard cho cau hoi ngoai pham vi du lich truoc khi goi core graph.
+        if "human_review" not in current_state.next and not is_travel_scope(request.message):
+            return ChatResponse(
+                response=(
+                    "Minh chi ho tro cac chu de du lich (diem den, lich trinh, thoi tiet, "
+                    "chuyen bay, khach san, ty gia). Ban vui long dat cau hoi ve du lich nhe."
+                ),
+                thread_id=thread_id,
+                status="success",
+                question=None,
+            )
         
         if "human_review" in current_state.next:
             # The agent was waiting for human input. 
