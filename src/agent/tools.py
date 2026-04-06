@@ -10,6 +10,9 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 from langchain_core.tools import tool
+from tavily import TavilyClient
+from src.core.config import settings
+
 
 
 # Tìm file .env từ thư mục gốc project (2 cấp trên src/agent/)
@@ -20,89 +23,92 @@ load_dotenv(dotenv_path=_env_path)
 _RESULT_DIR = Path(__file__).resolve().parents[2] / "tool result"
 _RESULT_DIR.mkdir(exist_ok=True)
 
-@tool
-def get_weather(location: str) -> dict:
-    """
-    Lấy thông tin thời tiết hiện tại và dự báo cho một địa điểm.
+tavily = TavilyClient(api_key=settings.TAVILY_API_KEY)
 
-    Args:
-        location: Tên thành phố hoặc địa điểm (e.g., "Tokyo", "Ho Chi Minh City")
 
-    Returns:
-        dict chứa thông tin thời tiết:
-            - location: tên địa điểm
-            - temperature_c: nhiệt độ hiện tại (°C)
-            - feels_like_c: nhiệt độ cảm nhận (°C)
-            - humidity_pct: độ ẩm (%)
-            - description: mô tả thời tiết (e.g., "clear sky")
-            - wind_speed_ms: tốc độ gió (m/s)
-            - forecast: danh sách dự báo 5 ngày tới (mỗi ngày: date, temp_min_c, temp_max_c, description)
-    """
-    api_key = os.environ.get("OPENWEATHER_API_KEY", "")
-    if not api_key:
-        raise EnvironmentError(
-            "Thiếu API key. Hãy set biến môi trường OPENWEATHER_API_KEY."
-        )
+# @tool
+# def get_weather(location: str) -> dict:
+#     """
+#     Lấy thông tin thời tiết hiện tại và dự báo cho một địa điểm.
 
-    base_url = "https://api.openweathermap.org/data/2.5"
-    encoded_location = urllib.parse.quote(location)
+#     Args:
+#         location: Tên thành phố hoặc địa điểm (e.g., "Tokyo", "Ho Chi Minh City")
 
-    # --- Thời tiết hiện tại ---
-    current_url = (
-        f"{base_url}/weather"
-        f"?q={encoded_location}"
-        f"&appid={api_key}"
-        f"&units=metric"
-        f"&lang=vi"
-    )
-    with urllib.request.urlopen(current_url, timeout=10) as response:
-        current_data = json.loads(response.read().decode())
+#     Returns:
+#         dict chứa thông tin thời tiết:
+#             - location: tên địa điểm
+#             - temperature_c: nhiệt độ hiện tại (°C)
+#             - feels_like_c: nhiệt độ cảm nhận (°C)
+#             - humidity_pct: độ ẩm (%)
+#             - description: mô tả thời tiết (e.g., "clear sky")
+#             - wind_speed_ms: tốc độ gió (m/s)
+#             - forecast: danh sách dự báo 5 ngày tới (mỗi ngày: date, temp_min_c, temp_max_c, description)
+#     """
+#     api_key = os.environ.get("OPENWEATHER_API_KEY", "")
+#     if not api_key:
+#         raise EnvironmentError(
+#             "Thiếu API key. Hãy set biến môi trường OPENWEATHER_API_KEY."
+#         )
 
-    current = {
-        "location": current_data["name"],
-        "temperature_c": current_data["main"]["temp"],
-        "feels_like_c": current_data["main"]["feels_like"],
-        "humidity_pct": current_data["main"]["humidity"],
-        "description": current_data["weather"][0]["description"],
-        "wind_speed_ms": current_data["wind"]["speed"],
-    }
+#     base_url = "https://api.openweathermap.org/data/2.5"
+#     encoded_location = urllib.parse.quote(location)
 
-    # --- Dự báo 5 ngày (mỗi 3 giờ → lấy mốc 12:00 hàng ngày) ---
-    forecast_url = (
-        f"{base_url}/forecast"
-        f"?q={encoded_location}"
-        f"&appid={api_key}"
-        f"&units=metric"
-        f"&lang=vi"
-    )
-    with urllib.request.urlopen(forecast_url, timeout=10) as response:
-        forecast_data = json.loads(response.read().decode())
+#     # --- Thời tiết hiện tại ---
+#     current_url = (
+#         f"{base_url}/weather"
+#         f"?q={encoded_location}"
+#         f"&appid={api_key}"
+#         f"&units=metric"
+#         f"&lang=vi"
+#     )
+#     with urllib.request.urlopen(current_url, timeout=10) as response:
+#         current_data = json.loads(response.read().decode())
 
-    seen_dates = set()
-    forecast = []
-    for item in forecast_data["list"]:
-        date = item["dt_txt"].split(" ")[0]          # "YYYY-MM-DD"
-        time_part = item["dt_txt"].split(" ")[1]     # "HH:MM:SS"
-        if time_part == "12:00:00" and date not in seen_dates:
-            seen_dates.add(date)
-            forecast.append({
-                "date": date,
-                "temp_min_c": item["main"]["temp_min"],
-                "temp_max_c": item["main"]["temp_max"],
-                "description": item["weather"][0]["description"],
-            })
-        if len(forecast) >= 5:
-            break
+#     current = {
+#         "location": current_data["name"],
+#         "temperature_c": current_data["main"]["temp"],
+#         "feels_like_c": current_data["main"]["feels_like"],
+#         "humidity_pct": current_data["main"]["humidity"],
+#         "description": current_data["weather"][0]["description"],
+#         "wind_speed_ms": current_data["wind"]["speed"],
+#     }
 
-    result = {**current, "forecast": forecast}
+#     # --- Dự báo 5 ngày (mỗi 3 giờ → lấy mốc 12:00 hàng ngày) ---
+#     forecast_url = (
+#         f"{base_url}/forecast"
+#         f"?q={encoded_location}"
+#         f"&appid={api_key}"
+#         f"&units=metric"
+#         f"&lang=vi"
+#     )
+#     with urllib.request.urlopen(forecast_url, timeout=10) as response:
+#         forecast_data = json.loads(response.read().decode())
 
-    # Ghi ra file JSON vào folder "tool result"
-    output_path = _RESULT_DIR / "weather_result.json"
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(result, f, ensure_ascii=False, indent=2)
-    print(f"[OK] Đã lưu kết quả vào: {output_path}")
+#     seen_dates = set()
+#     forecast = []
+#     for item in forecast_data["list"]:
+#         date = item["dt_txt"].split(" ")[0]          # "YYYY-MM-DD"
+#         time_part = item["dt_txt"].split(" ")[1]     # "HH:MM:SS"
+#         if time_part == "12:00:00" and date not in seen_dates:
+#             seen_dates.add(date)
+#             forecast.append({
+#                 "date": date,
+#                 "temp_min_c": item["main"]["temp_min"],
+#                 "temp_max_c": item["main"]["temp_max"],
+#                 "description": item["weather"][0]["description"],
+#             })
+#         if len(forecast) >= 5:
+#             break
 
-    return result
+#     result = {**current, "forecast": forecast}
+
+#     # Ghi ra file JSON vào folder "tool result"
+#     output_path = _RESULT_DIR / "weather_result.json"
+#     with open(output_path, "w", encoding="utf-8") as f:
+#         json.dump(result, f, ensure_ascii=False, indent=2)
+#     print(f"[OK] Đã lưu kết quả vào: {output_path}")
+
+#     return result
 
 @tool
 def get_exchange_rate(from_currency: str, to_currency: str) -> dict:
@@ -374,14 +380,7 @@ def search_flights_serpapi(
     stops: int | None = None,
 ) -> dict:
     """
-    Tìm chuyến bay qua SerpApi (Google Flights). Thay thế cho search_flights().
-
-    So với Skyscanner/RapidAPI:
-        ✔ Không cần resolve entityId — dùng thẳng mã IATA
-        ✔ Trả về giá Google Flights (thường rẻ hơn / đầy đủ hơn)
-        ✔ Hỗ trợ khứ hồi (truyền return_date)
-        ✔ Lọc số điểm dừng (stops=0 → bay thẳng)
-        ✔ 100 request/tháng miễn phí
+    Tìm thông tin các chuyến bay qua SerpApi (Google Flights).
 
     Args:
         origin:       Mã sân bay IATA điểm đi       (e.g., "HAN", "SGN")
@@ -569,7 +568,7 @@ def search_hotels(
     max_results: int = 10,
 ) -> dict:
     """
-    Tìm kiếm khách sạn qua SerpApi (Google Hotels). Dùng chung SERPAPI_KEY.
+    Tìm kiếm khách sạn qua SerpApi (Google Hotels).
 
     Args:
         location:    Tên thành phố / địa điểm (e.g., "Tokyo", "Shinjuku Tokyo")
@@ -595,9 +594,6 @@ def search_hotels(
                               deal (nhãn khuyến mãi nếu có), link
             - cheapest    : khách sạn rẻ nhất (hoặc None)
             - brands      : danh sách nhãn hiệu nổi bật (nếu có)
-
-    Side effect:
-        Ghi kết quả ra file hotels_result.json trong folder "tool result".
     """
     api_key = os.environ.get("SERPAPI_KEY", "")
     if not api_key or api_key == "your_serpapi_key_here":
@@ -725,12 +721,12 @@ def search_hotels(
 # Lệnh: python src/agent/tool.py
 # ==============================================================
 
-if __name__ == "__main__":
-    # Fix encoding UTF-8 cho terminal Windows
-    sys.stdout.reconfigure(encoding="utf-8")
+# if __name__ == "__main__":
+#     # Fix encoding UTF-8 cho terminal Windows
+#     sys.stdout.reconfigure(encoding="utf-8")
 
-    # Địa điểm muốn kiểm tra thời tiết
-    test_location = "Tokyo"
+#     # Địa điểm muốn kiểm tra thời tiết
+#     test_location = "Tokyo"
 
     # print(f"Đang lấy thông tin thời tiết cho: {test_location} ...\n")
     #
@@ -980,6 +976,31 @@ if __name__ == "__main__":
     #     print(f"[LỖI] {e}")
 
 @tool
+def search_web_info(thought: str, query: str):
+    """
+    Searches the internet for real-time information (weather, news, gold prices, current time, etc.)
+    using Tavily Search API. Returns a concise summary of the findings.
+    Args:
+        thought (str): Why you need to perform this search.
+        query (str): The specific search query.
+    Returns:
+        str: A summary of the search results, or an error message starting with 'Error:' if the search fails.
+    """
+    try:
+        
+        response = tavily.search(query=query, search_depth="basic", include_answer=True)
+        print(f"Tavily Search Response: {response}")
+        
+        if response.get("answer"):
+            return f"Search Result: {response['answer']}"
+        
+        context = "\n".join([f"- {res['content']}" for res in response['results'][:3]])
+        return f"Search Results for '{query}':\n{context}"
+        
+    except Exception as e:
+        return f"Error searching Tavily: {str(e)}"
+
+@tool
 def request_user(question: str):
     """
     Ask the user for missing information or clarification.
@@ -989,4 +1010,4 @@ def request_user(question: str):
     return f"REQUESTED_USER_INPUT: {question}"
 
 
-tools = [get_weather, get_exchange_rate, web_search, calculator, search_flights_serpapi, search_hotels, request_user]
+tools = [get_exchange_rate, web_search, calculator, search_flights_serpapi, search_hotels, request_user, search_web_info]

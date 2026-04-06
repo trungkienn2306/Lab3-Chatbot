@@ -2,18 +2,47 @@ from src.agent.graph import app
 from langchain_core.messages import HumanMessage, ToolMessage
 import uuid
 
-def format_ai_response(content):
+import re
+
+def format_ai_response(content) -> str:
     """
-    Extracts clean text from the AI response content, 
-    handling both string and structured list formats from Gemini.
+    Converts AI markdown response to clean, readable plain text.
+    - Strips bold/italic markers (**text**, *text*, __text__)
+    - Converts markdown bullet points to dash bullets
+    - Normalises multiple blank lines
+    - Decodes escaped newlines \\n → actual newlines
     """
-    if isinstance(content, str):
-        return content
     if isinstance(content, list):
-        # Extract text from all text blocks
-        texts = [block.get("text", "") for block in content if isinstance(block, dict) and block.get("type") == "text"]
-        return " ".join(texts).strip()
-    return str(content)
+        # Gemini may return a list of content blocks
+        texts = [
+            block.get("text", "")
+            for block in content
+            if isinstance(block, dict) and block.get("type") == "text"
+        ]
+        content = " ".join(texts).strip()
+
+    if not isinstance(content, str):
+        content = str(content)
+
+    # 1. Replace literal \n escape sequences with real newlines (common in JSON strings)
+    content = content.replace("\\n", "\n")
+
+    # 2. Remove bold/italic markdown: **text** → text, __text__ → text, *text* → text
+    content = re.sub(r"\*{2}(.+?)\*{2}", r"\1", content, flags=re.DOTALL)
+    content = re.sub(r"_{2}(.+?)_{2}", r"\1", content, flags=re.DOTALL)
+    content = re.sub(r"\*(.+?)\*", r"\1", content, flags=re.DOTALL)
+
+    # 3. Convert markdown bullet "* " or "•" at line start → "- "
+    content = re.sub(r"^[ \t]*[\*•][ \t]+", "- ", content, flags=re.MULTILINE)
+
+    # 4. Remove markdown headers (# Heading → Heading)
+    content = re.sub(r"^#{1,6}\s+", "", content, flags=re.MULTILINE)
+
+    # 5. Collapse 3+ consecutive blank lines → max 2
+    content = re.sub(r"\n{3,}", "\n\n", content)
+
+    return content.strip()
+
 
 def run_chat():
     thread_id = str(uuid.uuid4())
