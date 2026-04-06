@@ -1,11 +1,14 @@
-from fastapi import FastAPI, HTTPException, Request
+import os
+import uuid
+from typing import Optional
+
+import uvicorn
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Optional, List, Any
-import uuid
-import uvicorn
-from src.agent.graph import app as agent_app
 from langchain_core.messages import HumanMessage, ToolMessage
+
+from src.agent.graph import app as agent_app
 from src.app import format_ai_response
 
 app = FastAPI(title="Smart Travel Assistant API")
@@ -28,6 +31,18 @@ class ChatResponse(BaseModel):
     thread_id: str
     status: str  # "success", "need_input", "error"
     question: Optional[str] = None
+
+
+@app.get("/health")
+def health() -> dict[str, object]:
+    # Readiness don gian cho backend src (khong phu thuoc DB runtime).
+    required = ["GEMINI_API_KEY", "OPENWEATHER_API_KEY", "EXCHANGERATE_API_KEY", "SERPAPI_KEY"]
+    missing = [name for name in required if not os.getenv(name)]
+    return {
+        "status": "ok",
+        "core_agent": "ready" if not missing else "degraded",
+        "missing_keys": missing,
+    }
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):

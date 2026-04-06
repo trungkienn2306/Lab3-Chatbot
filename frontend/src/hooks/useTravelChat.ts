@@ -5,10 +5,9 @@ import {
   ensureSessionId,
   newSessionId,
   readAllMessages,
-  readSessionId,
   writeAllMessages,
 } from '../lib/chatStorage'
-import { getHealth, getHistory, postChat } from '../lib/chatApi'
+import { getHealth, postChat } from '../lib/chatApi'
 
 function newMessage(role: ChatMessage['role'], content: string): ChatMessage {
   return {
@@ -26,6 +25,7 @@ export function useTravelChat() {
   })
   const [isTyping, setIsTyping] = useState(false)
   const [historyReady, setHistoryReady] = useState(false)
+  const [threadId, setThreadId] = useState<string | null>(null)
 
   useEffect(() => {
     writeAllMessages(messages)
@@ -34,26 +34,22 @@ export function useTravelChat() {
   useEffect(() => {
     let cancelled = false
     async function bootstrapHistory() {
-      const sessionId = ensureSessionId()
+      ensureSessionId()
       try {
         const health = await getHealth()
-        if (health.database !== 'up') {
+        if (health.core_agent === 'degraded') {
           if (!cancelled) {
             setMessages((prev) => {
               if (prev.length > 0) return prev
               return [
                 newMessage(
                   'assistant',
-                  'Backend chưa sẵn sàng (DB down). Bạn có thể chạy API/DB rồi thử lại.',
+                  `Core agent chưa sẵn sàng. Thiếu key: ${(health.missing_keys ?? []).join(', ')}`,
                 ),
               ]
             })
           }
           return
-        }
-        const remote = await getHistory(sessionId)
-        if (!cancelled && remote.length > 0) {
-          setMessages(remote)
         }
       } catch {
         if (!cancelled) {
@@ -62,7 +58,7 @@ export function useTravelChat() {
             return [
               newMessage(
                 'assistant',
-                'Không thể kết nối backend lúc này. Bạn kiểm tra API trước khi tiếp tục.',
+                'Không thể kết nối backend lúc này. Bạn kiểm tra API cổng 8000 trước khi tiếp tục.',
               ),
             ]
           })
@@ -91,6 +87,7 @@ export function useTravelChat() {
     clearAllChatStorage()
     newSessionId()
     setMessages([])
+    setThreadId(null)
   }, [isTyping, messages.length])
 
   const sendMessage = useCallback(
@@ -102,25 +99,29 @@ export function useTravelChat() {
       setMessages((prev) => [...prev, userMsg])
       setIsTyping(true)
       try {
-        const health = await getHealth()
-        if (health.database !== 'up') {
-          throw new Error('db-not-ready')
+        const result = await postChat({ message: trimmed, threadId })
+        if (result.threadId) {
+          setThreadId(result.threadId)
         }
-        const sessionId = readSessionId() ?? ensureSessionId()
-        const replyText = await postChat({ sessionId, message: trimmed, mode: 'agent' })
+        const replyText =
+          result.status === 'need_input' ? (result.question ?? result.response) : result.response
         const botMsg = newMessage('assistant', replyText)
         setMessages((prev) => [...prev, botMsg])
-      } catch {
+      } catch (error) {
+        console.error('[useTravelChat] sendMessage failed', {
+          browserOrigin: window.location.origin,
+          error,
+        })
         const errorMsg = newMessage(
           'assistant',
-          'Mình chưa thể xử lý vì backend/DB chưa sẵn sàng. Vui lòng thử lại sau ít phút.',
+          'Mình chưa thể xử lý vì backend chưa sẵn sàng. Vui lòng thử lại sau ít phút.',
         )
         setMessages((prev) => [...prev, errorMsg])
       } finally {
         setIsTyping(false)
       }
     },
-    [isTyping],
+    [isTyping, threadId],
   )
 
   return {
