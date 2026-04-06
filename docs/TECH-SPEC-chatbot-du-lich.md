@@ -233,3 +233,10 @@ DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=publ
 | Một cửa sổ + đoạn mới | Đổi `session_id`, xóa `localStorage` messages |
 | Metric báo cáo Lab 3 | `lab_metric_log` + `logs/*.json` |
 | Theme du lịch | Tailwind + icon máy bay, palette mục 3.2 |
+
+---
+
+## Phụ lục: phiên bản tài liệu liên quan
+
+- **Tích hợp backend đầy đủ (API + ReAct + cấu trúc `apps/api`):** xem [TECH-SPEC-chatbot-du-lich-v2-integrated.md](v2/TECH-SPEC-chatbot-du-lich-v2-integrated.md) v2.0 (mục lục [v2/README.md](v2/README.md)).
+- **Hợp đồng REST chi tiết:** [API-DESIGN-travel-chat-backend.md](v2/API-DESIGN-travel-chat-backend.md).

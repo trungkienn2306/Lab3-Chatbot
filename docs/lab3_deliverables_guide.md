@@ -61,3 +61,9 @@ Dựa trên yêu cầu mới nhất, bộ tiêu chí nộp bài (Deliverables) c
 *   **Nhiệm vụ (Chọn triển khai một trong hai, hoặc cả hai):**
     *   **Fallback Path (Cơ chế dự phòng):** Xây dựng cơ chế try-except. Nếu quá trình trích xuất JSON lỗi hoặc API Tool bị chết (Timeout) sau N lần retry, Agent không được crash toàn bộ chương trình mà phải tự động ngắt và trả về thông báo lỗi thân thiện với người dùng.
     *   **Human Escalation (Chuyển tiếp con người):** Tạo một Tool mới chỉ định ví dụ như `escalate_to_human`. Điều chỉnh system prompt: *"Nếu người dùng yêu cầu thao tác phức tạp, hoặc hệ thống không thể đáp ứng công cụ sẵn có, hãy dùng tool này"*. Khi tool chạy, in ra nội dung chuyển hướng tới hỗ trợ viên con người.
+
+---
+
+## Tài liệu liên quan
+
+- [LAB3_SCORING_DELIVERY_PLAYBOOK.md](LAB3_SCORING_DELIVERY_PLAYBOOK.md) — ánh xạ deliverables và rubric SCORING sang checklist code/báo cáo, nối PRD chatbot du lịch và hướng dẫn cho AI agent.

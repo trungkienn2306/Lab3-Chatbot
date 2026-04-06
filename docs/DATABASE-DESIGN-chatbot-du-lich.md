@@ -132,3 +132,4 @@ DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=publ
 - **1.0:** Một bảng `chat_message` + `session_id`.
 - **2.0:** Đa hội thoại + `conversation` + `lab_metric_log` (đã rút gọn cho lab nhỏ).
 - **3.0:** Một luồng chat (khớp FE hiện tại) + `lab_metric_log` tùy chọn.
+- **4.0:** Tài liệu riêng [DATABASE-DESIGN-chatbot-du-lich-v4.md](v2/DATABASE-DESIGN-chatbot-du-lich-v4.md) trong [docs/v2](v2/README.md) — chuẩn `metadata` + bảng `tool_invocation` tuỳ chọn cho ReAct.

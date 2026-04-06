@@ -2,9 +2,14 @@
 
 Giao diện chat kiểu ChatGPT: **rail trái** (menu, logo, nút *Đoạn chat mới*), vùng chat rộng (`max-w-4xl`). **Một cửa sổ chat duy nhất** — không danh sách nhiều hội thoại. Stack: React 19 + Vite 8 + TypeScript + Tailwind v4.
 
-## Chế độ hiện tại: mock (không API)
+## Chế độ hiện tại: API-backed (mock-first ở BE)
 
-- Phản hồi bot: [src/lib/mockReplies.ts](src/lib/mockReplies.ts) (~0,6–1,2s trễ).
+- Frontend gọi backend qua:
+  - `GET /api/health` (pre-flight DB check)
+  - `GET /api/chat/history` (đồng bộ lịch sử theo `session_id`)
+  - `POST /api/chat` (gửi tin và nhận phản hồi)
+- Base URL đọc từ `VITE_API_BASE_URL` (fallback: `http://localhost:8000`).
+- `src/lib/mockReplies.ts` giữ lại để tham chiếu/dự phòng, không còn trong luồng chat mặc định.
 
 ## Lưu cục bộ (`localStorage`)
 
@@ -28,6 +33,7 @@ Build / lint: `npm run build`, `npm run lint`.
 
 ## Cấu trúc chính
 
-- `src/hooks/useTravelChat.ts` — một luồng tin + `clearChat` + mock gửi tin
+- `src/hooks/useTravelChat.ts` — một luồng tin + `clearChat` + gọi API backend
 - `src/components/chat/` — `ChatRail`, `ChatTopBar`, `MessageList`, `ChatComposer`, …
 - `src/lib/chatStorage.ts` — đọc/ghi một key messages + session id
+- `src/lib/chatApi.ts` — API client FE cho health/history/chat

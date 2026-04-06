@@ -32,3 +32,16 @@ Khi cần thêm hướng dẫn hoặc bổ sung, viết file mới hoặc cập 
 - Giữ code gọn, đặt tên rõ, tách trách nhiệm hợp lý.
 - **Error handling** phải rõ ràng và **phù hợp chức năng module**: log hoặc thông báo có ngữ cảnh, không nuốt lỗi im lặng, không bọc try/catch quá rộng không cần thiết.
 - Với UI: người dùng cần biết khi thao tác thất bại (message lỗi phù hợp), không chỉ `console.error` nếu đó là luồng người dùng thấy được.
+
+## CORS guardrails (FE-BE)
+
+- Không hardcode một origin duy nhất cho mọi môi trường; cấu hình qua biến môi trường `CORS_ORIGINS`.
+- `CORS_ORIGINS` phải hỗ trợ nhiều origin phân tách bởi dấu phẩy (comma-separated), ví dụ: `http://localhost:5173,http://localhost:5174`.
+- Khi FE đổi port localhost hoặc domain, phải cập nhật `CORS_ORIGINS` tương ứng và restart backend trước khi test.
+- Trong tài liệu runbook/README liên quan API, luôn ghi rõ cặp URL FE-BE đang dùng để tránh nhầm lỗi CORS với lỗi API down.
+- Ưu tiên chẩn đoán theo thứ tự: kiểm tra `Origin` thực tế trên browser -> kiểm tra preflight `OPTIONS` -> kiểm tra header `Access-Control-Allow-Origin`.
+- Bắt buộc: trước khi bàn giao code FE-BE, phải xác nhận không còn lỗi CORS trên browser console cho các origin đang hỗ trợ.
+- Tiêu chí pass tối thiểu cho CORS:
+  - Request `GET /api/health` từ origin FE đang chạy phải có `Access-Control-Allow-Origin` hợp lệ.
+  - Preflight `OPTIONS` cho `POST /api/chat` phải thành công với origin FE đang chạy.
+  - Nếu FE chạy ở nhiều port localhost (ví dụ 5173/5174), phải test đủ các port đã khai báo trong `CORS_ORIGINS`.

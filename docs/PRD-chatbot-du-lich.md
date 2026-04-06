@@ -100,5 +100,8 @@ Sản phẩm là **chatbot tra cứu du lịch** trên web. Người dùng chat 
 
 ## 11. Phụ thuộc tài liệu
 
-- **Tech Spec:** monorepo, React/Vite/Tailwind + Python + PostgreSQL + SQLAlchemy + Alembic.
-- **Database design:** [DATABASE-DESIGN-chatbot-du-lich.md](DATABASE-DESIGN-chatbot-du-lich.md) v3.0 (`chat_message` + `lab_metric_log`).
+- **Tech Spec:** monorepo, React/Vite/Tailwind + Python + PostgreSQL + SQLAlchemy + Alembic — tổng quan [TECH-SPEC-chatbot-du-lich.md](TECH-SPEC-chatbot-du-lich.md) v1.2; tích hợp API + ReAct [TECH-SPEC-chatbot-du-lich-v2-integrated.md](v2/TECH-SPEC-chatbot-du-lich-v2-integrated.md) v2.0 (thư mục [v2](v2/README.md)).
+- **API:** [API-DESIGN-travel-chat-backend.md](v2/API-DESIGN-travel-chat-backend.md).
+- **Tool / agent backend:** [BACKEND-TOOLS-REACT-TRAVEL.md](v2/BACKEND-TOOLS-REACT-TRAVEL.md).
+- **Database design:** [DATABASE-DESIGN-chatbot-du-lich.md](DATABASE-DESIGN-chatbot-du-lich.md) v3.0 (`chat_message` + `lab_metric_log`); mở rộng tuỳ chọn [DATABASE-DESIGN-chatbot-du-lich-v4.md](v2/DATABASE-DESIGN-chatbot-du-lich-v4.md).
+- **Playbook điểm lab:** [LAB3_SCORING_DELIVERY_PLAYBOOK.md](LAB3_SCORING_DELIVERY_PLAYBOOK.md).
