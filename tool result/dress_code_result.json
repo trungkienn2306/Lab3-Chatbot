@@ -1,0 +1,39 @@
+{
+  "location": "Tokyo",
+  "temperature_c": 3.5,
+  "description": "tuyết nhẹ",
+  "packing_list": {
+    "Giữ ấm": [
+      "Áo khoác dày (down jacket / puffer coat)",
+      "Áo len / áo nỉ dày bên trong",
+      "Quần nỉ lót nhiệt (thermal leggings)",
+      "Miếng dán giữ nhiệt (hand warmer / body warmer)",
+      "Áo đi tuyết chống thấm nước (waterproof jacket)",
+      "Áo gió kín cổ"
+    ],
+    "Phụ kiện": [
+      "Găng tay giữ ấm",
+      "Mũ len / mũ trùm đầu",
+      "Khăn quàng cổ",
+      "Kính chống tuyết / goggles (nếu trượt tuyết)",
+      "Mũ có dây buộc chống gió"
+    ],
+    "Giày dép": [
+      "Boots chống nước, đế chống trơn trượt",
+      "Ủng đi tuyết chống thấm (snow boots)"
+    ],
+    "Vệ sinh cá nhân": [
+      "Khăn giấy thấm mồ hôi",
+      "Lăn khử mùi / xịt khử mùi"
+    ],
+    "Cơ bản": [
+      "Hộ chiếu + visa + vé máy bay (bản in dự phòng)",
+      "Tiền mặt JPY (ưu tiên) + thẻ quốc tế",
+      "Sạc dự phòng (power bank)",
+      "Adapter điện (Nhật dùng cắm 2 dẹt loại A)",
+      "Thuốc cá nhân + thuốc cảm cúm cơ bản",
+      "Tai nghe + điện thoại"
+    ]
+  },
+  "summary": "Thời tiết tại Tokyo: rét đậm (3.5°C), tuyết nhẹ. Đã tổng hợp 21 vật dụng cần mang chia thành 5 nhóm."
+}
